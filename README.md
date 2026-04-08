@@ -1,6 +1,6 @@
 # 5ive Migrations
 
-**20 major Solana protocols, rewritten in 5ive DSL.**
+**27 Solana protocols, rewritten in 5ive DSL.**
 
 This repo proves that 5ive can express production-grade on-chain logic from the biggest Solana protocols -- with 50-70% less compute, 99% smaller bytecode, and radically simpler code.
 
@@ -28,18 +28,26 @@ This repo proves that 5ive can express production-grade on-chain logic from the 
 | 18 | [Atlas Protocol](./atlas/) | Hybrid DEX | ~10,000 | ~600 | 26 | Done |
 | 19 | [CyberConnect](./cyberconnect/) | Social Graph | ~8,000 | ~450 | 31 | Done |
 | 20 | [Anchor Lending](./anchor-lending/) | Fixed-Rate Lending | ~10,000 | ~550 | 27 | Done |
-| | **Total** | | **~228,000** | **~9,800** | **453** | |
+| 21 | [Mercurial](./mercurial/) | Multi-Token Stable | ~8,000 | ~550 | 21 | Done |
+| 22 | [Tensor](./tensor/) | NFT DEX | ~10,000 | ~400 | 25 | Done |
+| 23 | [Apricot](./apricot/) | Yield + Assist | ~7,000 | ~500 | 23 | Done |
+| 24 | [Hyperspace](./hyperspace/) | Arbitrage + MEV | ~6,000 | ~500 | 26 | Done |
+| 25 | [Mercl](./mercl/) | Smart Wallet | ~5,000 | ~350 | 20 | Done |
+| 26 | [Larix](./larix/) | Fractional Assets | ~8,000 | ~450 | 27 | Done |
+| 27 | [Gym](./gym/) | Liquidity Bootstrap | ~6,000 | ~400 | 22 | Done |
+| | **Total** | | **~288,000** | **~12,500** | **617** | |
 
-> **~228,000 lines of Rust reduced to ~9,800 lines of 5ive DSL. Same logic. 23x less code. 453 on-chain instructions.**
+> **~288,000 lines of Rust reduced to ~12,500 lines of 5ive DSL. Same logic. 23x less code. 617 on-chain instructions.**
 
 ## Why This Matters
 
-These 20 protocols span **every category** on Solana:
+These 27 protocols span **every category** on Solana:
 
 **Foundation:**
 - **Solana Program Library** -- Core programs (Token, Governance, Stake Pool, Lending, ATA)
 - **Metaplex** -- THE NFT standard
 - **Civic** -- On-chain identity and verification
+- **Mercl** -- Smart wallet (multisig, session keys, social recovery)
 
 **Infrastructure:**
 - **Wormhole** -- #1 cross-chain bridge
@@ -51,20 +59,26 @@ These 20 protocols span **every category** on Solana:
 - **Orca Whirlpools** -- #1 concentrated liquidity AMM
 - **Raydium** -- Top DEX by volume
 - **Saber** -- Original Solana stableswap
+- **Mercurial** -- Multi-token stable pools (3/4 tokens)
 - **Jupiter** -- #1 DEX aggregator
 - **Aldrin** -- AMM + order book hybrid
 - **Atlas Protocol** -- Weighted pools + CLOB + margin + yield vaults
+- **Tensor** -- #1 NFT DEX (AMM + order book)
 
 **Advanced DeFi:**
 - **Marinade** -- #1 liquid staking (mSOL)
 - **Solend** -- Top lending with flash loans
 - **Tonic** -- Isolated lending markets
 - **Anchor Lending** -- Fixed-rate yield with liquidation queue
+- **Apricot** -- Lending + auto-deleverage assist
+- **Larix** -- Lending + NFT fractionalization
 - **Mango Markets** -- Cross-margined perps + spot
 - **Drift Protocol** -- vAMM perpetuals with dynamic spreads
+- **Hyperspace** -- Cross-DEX arbitrage + MEV protection
 
-**Social:**
-- **CyberConnect** -- Decentralized social graph (profiles, follows, subscriptions)
+**Liquidity & Social:**
+- **Gym** -- Liquidity bootstrapping (LBP, bonding curves, reward vaults)
+- **CyberConnect** -- Decentralized social graph
 
 ## What 5ive Gives You
 
@@ -103,19 +117,26 @@ five deploy build/main.five --cluster devnet
   pyth-crosschain/  # Crosschain price receiver (Wormhole VAA, TWAP, EMA)
   wormhole/         # Cross-chain bridge (VAA verification, guardian sets, token bridge)
   orca/             # Concentrated liquidity AMM (tick math, Q64.64 fixed-point)
+  mercurial/        # Multi-token stable AMM (2-4 tokens, vault strategies)
   marinade/         # Liquid staking (mSOL exchange rate, validator management)
   metaplex/         # NFT standard (metadata, editions, collections, royalties)
+  tensor/           # NFT DEX (bonding curves, order book, collection/trait bids)
   mango/            # Derivatives exchange (cross-margin perps, funding rates)
+  drift/            # Perpetuals vAMM (dynamic spreads, insurance fund, keeper system)
   solend/           # Lending protocol (WAD-precision interest, cTokens, flash loans)
+  tonic/            # Isolated lending (per-market risk, share accounting, ADL)
+  anchor-lending/   # Fixed-rate lending (yield reserve, bAsset rewards, liquidation queue)
+  apricot/          # Yield + auto-deleverage (Apricot Assist, X-Farm)
+  larix/            # Fractional assets (NFT fractionalization + lending + mining)
   jupiter/          # DEX aggregator (multi-hop routing, split routes, limit orders, DCA)
   aldrin/           # DEX + CLOB (AMM pools, order book, concentrated liquidity, farming)
-  drift/            # Perpetuals vAMM (dynamic spreads, insurance fund, keeper system)
+  atlas/            # Hybrid DEX (weighted pools, CLOB, cross-margin, yield vaults)
+  hyperspace/       # Arbitrage + MEV (cross-DEX arb, flash arb, MEV protection)
   bonfida/          # DEX + Name Service (order book, .sol domains, subdomains)
   civic/            # Identity (gatekeeper networks, gateway tokens, feature verification)
-  tonic/            # Isolated lending (per-market risk, share accounting, flash loans, ADL)
-  atlas/            # Hybrid DEX (weighted pools, CLOB, cross-margin, yield vaults)
   cyberconnect/     # Social graph (profiles, follows, content, subscriptions, orgs)
-  anchor-lending/   # Fixed-rate lending (yield reserve, bAsset rewards, liquidation queue)
+  mercl/            # Smart wallet (multisig, session keys, spending limits, recovery)
+  gym/              # Liquidity bootstrap (LBP, bonding curves, reward vaults, locks)
 ```
 
 ## Migration Notes

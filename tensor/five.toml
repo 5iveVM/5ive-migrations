@@ -1,0 +1,26 @@
+schema_version = 1
+
+[project]
+name = "5ive-tensor"
+version = "0.1.0"
+description = "tensor migrated to 5ive DSL"
+source_dir = "src"
+build_dir = "build"
+target = "vm"
+entry_point = "src/main.v"
+
+[optimizations]
+enable_compression = true
+enable_constraint_optimization = true
+optimization_level = "production"
+
+[dependencies]
+std = { package = "@5ive/std", version = "0.1.0", source = "bundled", link = "inline" }
+
+[build]
+output_artifact_name = "main"
+max_bytecode_size = 1048576
+target_compute_units = 200000
+
+[deploy]
+cluster = "devnet"
