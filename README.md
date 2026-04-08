@@ -1,6 +1,6 @@
 # 5ive Migrations
 
-**10 major Solana protocols, rewritten in 5ive DSL.**
+**15 major Solana protocols, rewritten in 5ive DSL.**
 
 This repo proves that 5ive can express production-grade on-chain logic from the biggest Solana protocols -- with 50-70% less compute, 99% smaller bytecode, and radically simpler code.
 
@@ -16,33 +16,45 @@ This repo proves that 5ive can express production-grade on-chain logic from the 
 | [Marinade Finance](./marinade/) | Liquid Staking | ~5,000 | ~400 | 20 | Done |
 | [Metaplex](./metaplex/) | NFT Standard | ~10,000 | ~400 | 18 | Done |
 | [Mango Markets](./mango/) | Derivatives | ~20,000 | ~700 | 21 | Done |
-| [Solend](./solend/) | Lending | ~8,000 | ~550 | 18+ | Done |
+| [Solend](./solend/) | Lending | ~8,000 | ~550 | 18 | Done |
 | [Jupiter](./jupiter/) | DEX Aggregator | ~12,000 | ~500 | 19 | Done |
-| **Total** | | **~95,000** | **~4,700** | **184** | |
+| [Solana Program Library](./spl/) | Core Programs | ~25,000 | ~700 | 39 | Done |
+| [Aldrin](./aldrin/) | DEX + CLOB | ~8,000 | ~600 | 30 | Done |
+| [Drift Protocol](./drift/) | Perpetuals (vAMM) | ~30,000 | ~900 | 34 | Done |
+| [Pyth Crosschain](./pyth-crosschain/) | Price Receiver | ~5,000 | ~450 | 21 | Done |
+| [Bonfida](./bonfida/) | DEX + Name Service | ~12,000 | ~500 | 26 | Done |
+| **Total** | | **~175,000** | **~7,350** | **334** | |
 
-> **~95,000 lines of Rust reduced to ~4,700 lines of 5ive DSL. Same logic. 20x less code.**
+> **~175,000 lines of Rust reduced to ~7,350 lines of 5ive DSL. Same logic. 24x less code. 334 on-chain instructions.**
 
 ## Why This Matters
 
-These 10 protocols represent the entire Solana DeFi stack:
+These 15 protocols represent the **entire Solana ecosystem**:
+
+**Foundation:**
+- **Solana Program Library** -- THE core programs (Token, Governance, Stake Pool, Token-Lending, ATA)
+- **Metaplex** -- THE NFT standard on Solana
 
 **Infrastructure:**
-- **Wormhole** -- #1 cross-chain bridge, $2B+ in bridged value
-- **Pyth** -- #1 oracle, powering 300+ DeFi protocols
-- **Metaplex** -- THE NFT standard on Solana
+- **Wormhole** -- #1 cross-chain bridge, $2B+ bridged value
+- **Pyth Network** -- #1 oracle, 300+ DeFi integrations
+- **Pyth Crosschain** -- Cross-chain price receiver via Wormhole
+- **Bonfida** -- DEX + .sol domain name service
 
 **DeFi Core:**
 - **Orca Whirlpools** -- #1 concentrated liquidity AMM
 - **Raydium** -- Top DEX by volume
 - **Saber** -- The original Solana stableswap
-- **Jupiter** -- #1 DEX aggregator, routing across all AMMs
+- **Jupiter** -- #1 DEX aggregator
+- **Aldrin** -- AMM + order book hybrid DEX
 
 **Advanced DeFi:**
-- **Marinade** -- #1 liquid staking protocol (mSOL)
+- **Marinade** -- #1 liquid staking (mSOL)
 - **Solend** -- Top lending protocol with flash loans
-- **Mango Markets** -- Cross-margined perps + spot trading
+- **Mango Markets** -- Cross-margined perps + spot
+- **Drift Protocol** -- vAMM perpetuals with dynamic spreads
 
-Every one of them was rewritten in 5ive DSL with **identical on-chain logic**, proving that 5ive is not a toy -- it's a production-ready alternative to Rust/Anchor for Solana smart contracts.
+Every one rewritten in 5ive DSL with **identical on-chain logic**.
 
 ## What 5ive Gives You
 
@@ -74,16 +86,21 @@ five deploy build/main.five --cluster devnet
 
 ```
 5ive-migrations/
-  saber/          # StableSwap AMM (Newton's method, amplification coefficient)
-  raydium/        # Constant product AMM (x*y=k, fee splitting, open-time gating)
-  pyth/           # Price oracle (publisher aggregation, weighted median)
-  wormhole/       # Cross-chain bridge (VAA verification, guardian sets, token bridge)
-  orca/           # Concentrated liquidity AMM (tick math, Q64.64 fixed-point)
-  marinade/       # Liquid staking (mSOL exchange rate, validator management)
-  metaplex/       # NFT standard (metadata, editions, collections, royalties)
-  mango/          # Derivatives exchange (cross-margin perps, funding rates, flash loans)
-  solend/         # Lending protocol (WAD-precision interest, cTokens, flash loans)
-  jupiter/        # DEX aggregator (multi-hop routing, split routes, limit orders, DCA)
+  spl/              # Solana Program Library (Token, Governance, Stake Pool, Lending, ATA)
+  saber/            # StableSwap AMM (Newton's method, amplification coefficient)
+  raydium/          # Constant product AMM (x*y=k, fee splitting, open-time gating)
+  pyth/             # Price oracle (publisher aggregation, weighted median)
+  pyth-crosschain/  # Crosschain price receiver (Wormhole VAA, TWAP, EMA)
+  wormhole/         # Cross-chain bridge (VAA verification, guardian sets, token bridge)
+  orca/             # Concentrated liquidity AMM (tick math, Q64.64 fixed-point)
+  marinade/         # Liquid staking (mSOL exchange rate, validator management)
+  metaplex/         # NFT standard (metadata, editions, collections, royalties)
+  mango/            # Derivatives exchange (cross-margin perps, funding rates, flash loans)
+  solend/           # Lending protocol (WAD-precision interest, cTokens, flash loans)
+  jupiter/          # DEX aggregator (multi-hop routing, split routes, limit orders, DCA)
+  aldrin/           # DEX + CLOB (AMM pools, order book, concentrated liquidity, farming)
+  drift/            # Perpetuals vAMM (dynamic spreads, insurance fund, keeper system)
+  bonfida/          # DEX + Name Service (order book, .sol domains, subdomains)
 ```
 
 ## Migration Notes
